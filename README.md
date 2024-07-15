@@ -1,4 +1,7 @@
 # Heuristica de busqueda (Algoritmo A*)
+> [!IMPORTANT]
+> Este proyecto es de caracter educativo y sirve para entender los principios y aplicaciones basicas del algoritmo de busqueda `A*`.
+
 El algoritmo A* (A-star) es un algoritmo de busqueda informada, siendo una extension del algoritmo de Dijkstra para encontrar los caminos mas cortos desde un nodo inicial hasta un nodo final utilizando grafos y espacios de busqueda. Utiliza una funcion de coste `f(n)` que combina dos componentes:
 - __Costo g(n):__ La distancia desde el nodo inicial hasta el nodo n.
 - __Heuristica h(n):__ Una estimacion del coste minimo desde el nodo n hasta el objetivo.
@@ -8,9 +11,6 @@ f(n) = g(n) + h(n)
 ```
 > [!NOTE]
 > La heuristica debe ser admisible, es decir, nunca debe sobreestimar el coste real para garantizar que A* encuentre el camino optimo.
-
-> [!IMPORTANT]
-> Este proyecto es de caracter educativo y sirve para entender los principios y aplicaciones basicas del algoritmo de busqueda `A*`.
 
 ## Aplicaciones del Algoritmo A*
 - __Navegacion GPS:__ Para encontrar rutas optimas en mapas de carreteras.
