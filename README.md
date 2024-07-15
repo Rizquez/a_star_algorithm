@@ -21,11 +21,11 @@ El algoritmo A* es ampliamente utilizado debido a su capacidad para encontrar ca
 
 - __Mapa de nodos__
 
-![img](images/mapa.png)
+![img](images/mapa_nodos.png)
 
 - __Ruta mas corta desde el nodo inicial al nodo final__
 
-![img](images/ruta.png)
+![img](images/ruta_nodos.png)
 
 ## Estructura del proyecto
 ```
