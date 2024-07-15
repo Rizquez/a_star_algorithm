@@ -71,7 +71,6 @@ def main(window):
 
             # Ahora vamos a verificar si se esta pulsando el clic derecho del raton
             elif pygame.mouse.get_pressed()[2]:
-                print("doy clic derecho")
                 position = pygame.mouse.get_pos()
                 row, column = get_clicked_position(position)
                 point = grid[row][column]
