@@ -72,6 +72,20 @@ Para ejecutar el proyecto, asegurate de que el entorno virtual este activado y e
 ```
 python main.py
 ```
+### Una vez activo el programa se podra: 
+- Indicar el nodo de inicio.
+- Indicar el nodo final.
+- Indicar las barreras entre los nodos de inicio y fin.
+- Ejecutar el algoritmo.
+- Reiniciar el programa.
+- Reorganizar los nodos.
+
+### Esto se hace de la siguiente manera:
+Con el clic `derecho` se indicaran todos los nodos y barreras, el primer clic sera el nodo de `inicio` y el segundo clic el nodo `final`, los siguientes clic seran las barreras (si se deja pulsado el clic derecho del raton se dibujaran las barreras de manera continua).
+
+Con el clic `izquierdo` se podra ir quitando los nodos o barreras que no se deseen mantener (es necesario un nodo de `inicio` y `fin` para que el algoritmo se ejecute).
+
+Para ejecutar se debera pulsar la tecla `espaciadora` y para reiniciar el programa se debera pulsar la tecla `c`.
 
 ## Contribuciones
 Las contribuciones son bienvenidas. Si deseas contribuir al proyecto, por favor haz un `fork` del repositorio, crea una rama con tus mejoras y envía un `pull request`.
