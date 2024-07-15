@@ -20,9 +20,11 @@ f(n) = g(n) + h(n)
 El algoritmo A* es ampliamente utilizado debido a su capacidad para encontrar caminos optimos de manera eficiente, combinando la busqueda de coste uniforme con heuristicas informadas para mejorar el rendimiento.
 
 - __Mapa de nodos__
+
 ![img](images/mapa.png)
 
 - __Ruta mas corta desde el nodo inicial al nodo final__
+
 ![img](images/ruta.png)
 
 ## Estructura del proyecto
