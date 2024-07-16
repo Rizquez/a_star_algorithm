@@ -5,6 +5,7 @@
 El algoritmo A* (A-star) es un algoritmo de busqueda informada, siendo una extension del algoritmo de Dijkstra para encontrar los caminos mas cortos desde un nodo inicial hasta un nodo final utilizando grafos y espacios de busqueda. Utiliza una funcion de coste `f(n)` que combina dos componentes:
 - __Costo g(n):__ La distancia desde el nodo inicial hasta el nodo n.
 - __Heuristica h(n):__ Una estimacion del coste minimo desde el nodo n hasta el objetivo.
+
 La funcion se define como:
 ```
 f(n) = g(n) + h(n)
@@ -19,11 +20,11 @@ f(n) = g(n) + h(n)
 - __IA y busqueda de patrones:__ En problemas de inteligencia artificial y busqueda de patrones.
 El algoritmo A* es ampliamente utilizado debido a su capacidad para encontrar caminos optimos de manera eficiente, combinando la busqueda de coste uniforme con heuristicas informadas para mejorar el rendimiento.
 
-- __Mapa de nodos__
+#### Mapa de nodos
 
 ![img](images/mapa_nodos.png)
 
-- __Ruta mas corta desde el nodo inicial al nodo final__
+#### Ruta mas corta desde el nodo inicial al nodo final
 
 ![img](images/ruta_nodos.png)
 
