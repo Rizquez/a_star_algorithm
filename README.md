@@ -30,6 +30,7 @@ El algoritmo A* es ampliamente utilizado debido a su capacidad para encontrar ca
 
 ## Estructura del proyecto
 ```
+├── images\...
 ├── src
 │   ├── config
 │   │   └── config.py
@@ -43,7 +44,8 @@ El algoritmo A* es ampliamente utilizado debido a su capacidad para encontrar ca
 ├── .gitignore
 ├── LICENSE
 ├── main.py
-└── README.md
+├── README.md
+└── requirements.txt
 ```
 
 ## Creacion de un entorno virtual
