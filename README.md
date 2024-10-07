@@ -1,4 +1,4 @@
-# Heuristica de busqueda (Algoritmo A*) - Pygame
+# Heuristica de busqueda (Algoritmo A*)
 
 > [!IMPORTANT]
 > Este proyecto es de caracter educativo y sirve para entender los principios y aplicaciones basicas del algoritmo de busqueda `A*`.
