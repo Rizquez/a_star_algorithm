@@ -1,4 +1,5 @@
-# Heuristica de busqueda (Algoritmo A*)
+# Heuristica de busqueda (Algoritmo A*) - Pygame
+
 > [!IMPORTANT]
 > Este proyecto es de caracter educativo y sirve para entender los principios y aplicaciones basicas del algoritmo de busqueda `A*`.
 
@@ -13,7 +14,7 @@ f(n) = g(n) + h(n)
 > [!NOTE]
 > La heuristica debe ser admisible, es decir, nunca debe sobreestimar el coste real para garantizar que A* encuentre el camino optimo.
 
-## Aplicaciones del Algoritmo A*
+## 🐍 Aplicaciones del Algoritmo A*
 - __Navegacion GPS:__ Para encontrar rutas optimas en mapas de carreteras.
 - __Videojuegos:__ Para la navegacion de personajes y planificacion de movimientos.
 - __Robotica:__ Para la planificacion de trayectorias en entornos complejos.
@@ -28,7 +29,7 @@ El algoritmo A* es ampliamente utilizado debido a su capacidad para encontrar ca
 
 ![img](images/ruta_nodos.png)
 
-## Estructura del proyecto
+## 📂 Estructura del proyecto
 ```
 ├── images\...
 ├── src
@@ -48,7 +49,7 @@ El algoritmo A* es ampliamente utilizado debido a su capacidad para encontrar ca
 └── requirements.txt
 ```
 
-## Creacion de un entorno virtual
+## ⚙️ Creacion de un entorno virtual
 Se necesitara tener instalada previamente la libreria `virtualenv`, en caso contrario se podra instalar ejecutando el siguiente comando:
 ```
 pip install virtualenv
@@ -64,13 +65,13 @@ venv\Scripts\activate
 > [!TIP]
 > Se recomienda la creacion de un entorno virtual para optimizar el desarrollo y la ejecucion del proyecto.
 
-## Dependencias
+## 🧾 Dependencias
 Las dependencias de este proyecto se encuentran en el fichero `requirements.txt`, las cuales se instalan mediante la ejecucion del siguiente comando:
 ```
 pip install -r requirements.txt
 ```
 
-## Uso del Proyecto
+## 🛠️ Uso del Proyecto
 Para ejecutar el proyecto, asegurate de que el entorno virtual este activado y ejecuta:
 ```
 python main.py
@@ -90,12 +91,12 @@ Con el clic `izquierdo` se podra ir quitando los nodos o barreras que no se dese
 
 Para ejecutar se debera pulsar la tecla `espaciadora` y para reiniciar el programa se debera pulsar la tecla `c`.
 
-## Contribuciones
+## 📝 Contribuciones
 Las contribuciones son bienvenidas. Si deseas contribuir al proyecto, por favor haz un `fork` del repositorio, crea una rama con tus mejoras y envía un `pull request`.
 
-## Licencia
-Este proyecto está bajo una licencia MIT. Consulta el archivo `LICENSE` para más detalles.
-
-## Recursos adicionales
+## 📚 Recursos adicionales
 * [Documentacion del Algoritmo A*](https://es.wikipedia.org/wiki/Algoritmo_de_b%C3%BAsqueda_A*)
 * [Explicacion interactiva de A*](https://www.lanshor.com/pathfinding-a-estrella/)
+
+* ## 📄 Licencia
+Este proyecto está bajo una licencia MIT. Consulta el archivo `LICENSE` para más detalles.
