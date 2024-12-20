@@ -104,13 +104,13 @@ def _reconstruct_path(came_from: dict, current: Point, draw: function) -> None:
     
     Parametros
     ----------
-    came_from: `dict`
+    came_from
         Diccionario que asigna cada nodo al nodo del que procede.
     
-    current: `node`
+    current
         Nodo actual que se esta examinando.
     
-    draw: `function`
+    draw
         Funcion para dibujar el estado actual de la cuadricula.
     """
     # Iniciamos un bucle sobre el diccionario de nodos
@@ -131,10 +131,10 @@ def _distance_between_points(point1: tuple, point2: tuple) -> int:
 
     Parametros
     ----------
-    point1: `tuple`
+    point1
         Coordenadas `(x, y)` del primer punto.
     
-    point2: `tuple`
+    point2
         Coordenadas `(x, y)` del segundo punto.
 
     Retorna
