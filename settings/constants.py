@@ -1,16 +1,25 @@
 # -------------------------------------------------------------------------------------------------------------------------------------------------
 # LIBRERIAS / APIs NECESARIAS
 # -------------------------------------------------------------------------------------------------------------------------------------------------
-import pygame
-from src.setup import main_method
-from settings import WINDOW_WIDTH
+
 # -------------------------------------------------------------------------------------------------------------------------------------------------
 
-if __name__ == '__main__':
-    pygame.init()
-    window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_WIDTH))
-    pygame.display.set_caption('Heuristica de busqueda (Algoritmo A*)')
-    main_method(window)
+# DIMENSIONES
+ROWS = 50
+WINDOW_WIDTH = 500
+GAP_GRID = WINDOW_WIDTH // ROWS
+
+# COLORES
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+YELLOW = (255, 255, 0)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+PURPLE = (128, 0, 128)
+ORANGE = (255, 165, 0)
+GREY = (128, 128, 128)
+TURQUOISE = (64, 224, 208)
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------
 # FIN DEL FICHERO

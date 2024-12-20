@@ -1,16 +1,8 @@
 # -------------------------------------------------------------------------------------------------------------------------------------------------
-# LIBRERIAS / APIs NECESARIAS
-# -------------------------------------------------------------------------------------------------------------------------------------------------
-import pygame
-from src.setup import main_method
-from settings import WINDOW_WIDTH
+# IMPORTACION DE LOS ELEMENTOS DEL MODULO
 # -------------------------------------------------------------------------------------------------------------------------------------------------
 
-if __name__ == '__main__':
-    pygame.init()
-    window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_WIDTH))
-    pygame.display.set_caption('Heuristica de busqueda (Algoritmo A*)')
-    main_method(window)
+from .algorithm import a_star
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------
 # FIN DEL FICHERO
