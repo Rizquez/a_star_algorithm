@@ -1,11 +1,12 @@
 # -------------------------------------------------------------------------------------------------------------------------------------------------
 # LIBRERIAS / APIs NECESARIAS
 # -------------------------------------------------------------------------------------------------------------------------------------------------
+from typing import Callable
 from queue import PriorityQueue
 from ..models import Point
 # -------------------------------------------------------------------------------------------------------------------------------------------------
 
-def a_star(draw: function, grid: list, start: Point, end: Point):
+def a_star(draw: Callable, grid: list, start: Point, end: Point):
     """
     Descripcion
     -----------
@@ -96,7 +97,7 @@ def a_star(draw: function, grid: list, start: Point, end: Point):
 
     return False
 
-def _reconstruct_path(came_from: dict, current: Point, draw: function) -> None:
+def _reconstruct_path(came_from: dict, current: Point, draw: Callable) -> None:
     """
     Descripcion
     -----------
