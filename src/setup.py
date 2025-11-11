@@ -1,146 +1,154 @@
-# -------------------------------------------------------------------------------------------------------------------------------------------------
-# LIBRERIAS / APIs NECESARIAS
-# -------------------------------------------------------------------------------------------------------------------------------------------------
+# MODULES (EXTERNAL)
+# ---------------------------------------------------------------------------------------------------------------------
 import pygame
-from .scripts import a_star
-from src.models import Point
+from typing import TYPE_CHECKING, List, Tuple
+
+if TYPE_CHECKING:
+    from pygame import Surface
+# ---------------------------------------------------------------------------------------------------------------------
+
+# MODULES (INTERNAL)
+# ---------------------------------------------------------------------------------------------------------------------
+from src.core import *
+from src.models import *
 from settings import ROWS, WHITE, WINDOW_WIDTH, GAP_GRID, GREY
-# -------------------------------------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------
 
-def main_method(window: pygame.Surface) -> None:
+# OPERATIONS / CLASS CREATION / GENERAL FUNCTIONS
+# ---------------------------------------------------------------------------------------------------------------------
+
+def main_method(window: 'Surface') -> None:
     """
-    Descripcion
-    -----------
-    Inicia la aplicacion y gestiona los eventos para el funcionamiento del programa.
+    Starts the application and manages events for the program's operation.
 
-    Este metodo principal controla la logica de interaccion del usuario, como dibujar la red de cuadriculas, establecer puntos de inicio y final, 
-    marcar barreras y ejecutar el algoritmo A*. Tambien permite reiniciar la red.
+    This main method controls the user interaction logic, such as drawing the grid network, 
+    setting start and end points, marking barriers, and executing the A* algorithm. It also 
+    allows the network to be restarted.
     
-    Parametros
-    ----------
-    window
-        Ventana de `pygame` utilizada para dibujar y mostrar la red de cuadriculas.
+    Args:
+        window (Surface):
+            `pygame` window in which the point is drawn.
     """
-    # Instanciamos los valores inicialres para el inicio, fin y el parametro de control de ejecucion
+    # We instantiate the initial values for the start, end, and execution control parameter
     start, end, run = None, None, True
 
-    # Ahora vamos a crear la cuadricula que contendra la red de cuadros
+    # Now we are going to create the grid that will contain the network of squares
     grid = _create_grid()
 
-    # Ahora iniciamos la activacion de los procesos mediante un bucle
+    # Now we start activating the processes using a loop
     while run:
 
-        # Primero vamos a dibujar todas las cuadriculas de la red
+        # First, let's draw all the grid squares
         _draw_network(window, grid)
 
-        # Una vez dibujado necesitamos iterar sobre los eventes que se generen en la ventana
+        # Once drawn, we need to iterate over the events generated in the window
         for event in pygame.event.get():
 
-            # El primer evento en controlar sera la salida del juego
+            # The first event to monitor will be the game's release
             if event.type == pygame.QUIT:
                 run = False
 
-            # Ahora necesitamos verificar si se pulsa la tecla izquierda del raton
+            # Now we need to check if the left mouse button is pressed
             if pygame.mouse.get_pressed()[0]:
 
-                # Para este caso vamos a localizar la posicion donde se dio clic
-                # Sobre dicha posicion localizaremos la cuadricula y marcaremos los puntos segun las caracteristicas de cada uno
+                # In this case, we will locate the position where the click occurred
+                # At that position, we will locate the grid and mark the points according 
+                # to the characteristics of each one
                 position = pygame.mouse.get_pos()
                 row, column = _get_clicked_position(position)
                 point = grid[row][column]
 
-                # Es importante señalar que siempre el primer clic sera 
-                # tomado como punto de inicio, el segundo clic sera tomado 
-                # como punto final y todos los demas clic seran las barreras 
-                # entre el punto de inicio y el final
+                # It is important to note that the first click will always be 
+                # taken as the starting point, the second click will be taken 
+                # as the end point, and all other clicks will be the barriers 
+                # between the starting point and the end point
 
-                # Si el punto de inicio no esta marcado
+                # If the starting point is not marked
                 if not start and point != end:
                     start = point
                     start.mark_start()
 
-                # Si el punto de final no esta marcado
+                # If the end point is not marked
                 elif not end and point != start:
                     end = point
                     end.mark_end()
 
-                # Sobre los punto de las barreras
+                # About the points of the barriers
                 else:
                     point.mark_barrier()
 
-            # Ahora vamos a verificar si se esta pulsando el clic derecho del raton
+            # Now let's check if the right mouse button is being clicked
             elif pygame.mouse.get_pressed()[2]:
                 position = pygame.mouse.get_pos()
                 row, column = _get_clicked_position(position)
                 point = grid[row][column]
                 point.reset()
 
-                # Reiniciando los valores del punto de inicio
+                # Resetting the values of the starting point
                 if point == start:
                     start = None
 
-                # Reiniciando los valores del punto final
+                # Resetting endpoint values
                 elif point == end:
                     end = None
 
-            # Ahora la idea seria evaluar el evento que da inicio a la 
-            # ejecucion del algoritmo y que reinicia la red de cuadriculas
-            # Para manejar estos eventos, nos centraremos en las teclas
+                else:
+                    pass
+
+            # Now the idea would be to evaluate the event that starts 
+            # the execution of the algorithm and restarts the grid network
+            # To handle these events, we will focus on the keys
             if event.type == pygame.KEYDOWN:
 
-                # El primer evento en controlar sera el de ejecucion del algoritmo
+                # The first event to be controlled will be the execution of the algorithm
                 if event.key == pygame.K_SPACE and start and end:
                     for row in grid:
                         for point in row:
                             point.update_neighbors(grid)
 
-                    # Una vez actualizamos todos los vecinos, llamamos al algoritmo de la estrella
+                    # Once we update all the neighbors, we call the star algorithm
                     a_star(lambda: _draw_network(window, grid), grid, start, end)
 
-                # Y Ahora para controlar el reinicio usaremos la tacla `C`
+                # And now to control the restart we will use the C key.
                 if event.key == pygame.K_c:
                     start = None
                     end = None
                     grid = _create_grid()
 
-    # Por ultimo cerramos la aplicacion
+    # Finally, we close the application
     pygame.quit()
 
-def _get_clicked_position(position: tuple) -> tuple[int, int]:
+def _get_clicked_position(position: Tuple) -> Tuple[int, int]:
     """
-    Descripcion
-    -----------
-    Obtiene la fila y columna donde se encuentra un clic en la red de cuadriculas.
+    Obtains the row and column where a click occurs on the grid.
 
-    Parametros
-    ----------
-    position
-        Coordenadas `(x, y)` del clic del usuario.
+    Args:
+        position (Tuple):
+            Coordinates `(x, y)` of the user's click.
 
-    Retorna
-    -------
-    - Fila y columna donde se realizo el clic.
+    Returns:
+        Tuple:
+            Row and column where the click occurred.
     """
-    # Extraemos las coordenadas
+    # We extract the coordinates
     y, x = position
 
-    # Ahora necesitamos calcular la fila y columna en funcion de las coordenadas
+    # Now we need to calculate the row and column based on the coordinates
     row = y // GAP_GRID
     column = x // GAP_GRID
     
     return row, column
 
-def _create_grid() -> list:
+def _create_grid() -> List:
     """
-    Descripcion
-    -----------
-    Crea la red de cuadriculas utilizada en el programa.
+    Creates the grid network used in the program.
 
-    Esta funcion genera una lista bidimensional que representa las filas y columnas de la cuadricula.
+    This function generates a two-dimensional list representing the rows and columns of the grid.
 
-    Retorna
-    -------
-    - Lista de listas anidadas con objetos `Point` que representan cada celda de la cuadricula.
+    Returns:
+        List:
+            List of nested lists with `Point` objects representing each cell in the grid.
+    
     """
     # Primero vamos a instanciar la lista que va a almacenar los datos sobre las dimensiones de la red de cuadriculas
     grid = []
@@ -155,55 +163,47 @@ def _create_grid() -> list:
 
     return grid
 
-def _draw_network(window: pygame.Surface, grid: list) -> None:
+def _draw_network(window: 'Surface', grid: List) -> None:
     """
-    Descripcion
-    -----------
-    Dibuja la red de cuadriculas en la ventana.
+    Draw the grid in the window.
 
-    Parametros
-    ----------
-    window
-        Ventana de `pygame` utilizada para dibujar y mostrar la red de cuadriculas.
-    
-    grid
-        Lista de listas anidadas que representa la cuadricula.
+    Args:
+        window (Surface):
+            `pygame` window in which the point is drawn.
+        grid (List):
+            List of nested lists representing the grid network.
     """
-    # Primero definimos el color de la ventana 
+    # First, we define the color of the window. 
     window.fill(WHITE)
     
-    # Ahora vamos a iterar sobre la lista con los datos de la red de cuadriculas
-    # Y por cada sublista vamos a capturar el punto que ha sido creado para dibujarlo 
-    # aplicando el metodo interno de la clase que gestiona los punto.
+    # Now we are going to iterate over the list with the grid network data
+    # And for each sublist, we are going to capture the point that has been created 
+    # to draw it, applying the internal method of the class that manages the points
     for row in grid:
         for point in row:
             point.drawing(window)
 
-    # Una vez dibujado cada punto vamos a delinear los contornos para separalos visualmente
-    # Al finalizar necesitaremos actualizar la ventana
+    # Once each point has been drawn, we will outline the contours to separate them visually
+    # When finished, we will need to update the window
     _draw_squares(window)
     pygame.display.update()
 
-def _draw_squares(window: pygame.Surface) -> None:
+def _draw_squares(window: 'Surface') -> None:
     """
-    Descripcion
-    -----------
-    Dibuja las lineas de las cuadriculas en la ventana.
+    Draw the grid lines in the window.
 
-    Parametros
-    ----------
-    window
-        Ventana de `pygame` utilizada para dibujar y mostrar la red de cuadriculas.
+    Args:
+        window (Surface):
+            `pygame` window in which the point is drawn.
     """
-    # Constante para indicar la coordenada de inicio de la linea
+    # Constant to indicate the starting coordinate of the line
     START_POINT = 0
 
-    # Ahora simplemente vamos a iterar sobre la cantidad de filas para delinear los bordes de cada cuadricula
+    # Now we're just going to iterate over the number of rows to outline the edges of each grid
     for row in range(ROWS):
         pygame.draw.line(window, GREY, (START_POINT, row * GAP_GRID), (WINDOW_WIDTH, row * GAP_GRID))
         for column in range(ROWS):
             pygame.draw.line(window, GREY, (column * GAP_GRID, START_POINT), (column * GAP_GRID, WINDOW_WIDTH))
 
-# -------------------------------------------------------------------------------------------------------------------------------------------------
-# FIN DEL FICHERO
-# -------------------------------------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------
+# END OF FILE

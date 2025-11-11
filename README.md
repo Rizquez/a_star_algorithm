@@ -1,46 +1,107 @@
-# Heuristica de busqueda (Algoritmo A*)
+# Search heuristics (A* algorithm)
 
 > [!IMPORTANT]
-> Este proyecto es de caracter educativo y sirve para entender los principios y aplicaciones basicas del algoritmo de busqueda `A*`.
+> This project is educational in nature and serves to understand the basic principles and applications of the `A*` search algorithm.
 
-El algoritmo A* (A-star) es un algoritmo de busqueda informada, siendo una extension del algoritmo de Dijkstra para encontrar los caminos mas cortos desde un nodo inicial hasta un nodo final utilizando grafos y espacios de busqueda. Utiliza una funcion de coste `f(n)` que combina dos componentes:
-- __Costo g(n):__ La distancia desde el nodo inicial hasta el nodo n.
-- __Heuristica h(n):__ Una estimacion del coste minimo desde el nodo n hasta el objetivo.
+The A* (A-star) algorithm is an informed search algorithm, being an extension of Dijkstra's algorithm for finding the shortest paths from an initial node to a final node using graphs and search spaces. It uses a cost function `f(n)` that combines two components:
 
-La funcion se define como:
+- __Cost g(n):__ The distance from the starting node to node n.
+- __Heuristic h(n):__ An estimate of the minimum cost from node n to the goal.
+
+The function is defined as:
 ```
 f(n) = g(n) + h(n)
 ```
 > [!NOTE]
-> La heuristica debe ser admisible, es decir, nunca debe sobreestimar el coste real para garantizar que A* encuentre el camino optimo.
+> The heuristic must be admissible, i.e., it must never overestimate the actual cost to ensure that A* finds the optimal path.
 
-## 🐍 Aplicaciones del Algoritmo A*
-- __Navegacion GPS:__ Para encontrar rutas optimas en mapas de carreteras.
-- __Videojuegos:__ Para la navegacion de personajes y planificacion de movimientos.
-- __Robotica:__ Para la planificacion de trayectorias en entornos complejos.
-- __IA y busqueda de patrones:__ En problemas de inteligencia artificial y busqueda de patrones.
-El algoritmo A* es ampliamente utilizado debido a su capacidad para encontrar caminos optimos de manera eficiente, combinando la busqueda de coste uniforme con heuristicas informadas para mejorar el rendimiento.
+## 🐍 Applications of the A* Algorithm
 
-#### Mapa de nodos
+- __GPS navigation:__ To find optimal routes on road maps.
+- __Video games:__ For character navigation and movement planning.
+- __Robotics:__ For trajectory planning in complex environments.
+- __AI and pattern matching:__ In artificial intelligence and pattern matching problems.
 
-![img](images/mapa_nodos.png)
+The A* algorithm is widely used due to its ability to find optimal paths efficiently, combining uniform cost search with informed heuristics to improve performance.
 
-#### Ruta mas corta desde el nodo inicial al nodo final
+## 💽 Installation (Windows)
 
-![img](images/ruta_nodos.png)
-
-## 📂 Estructura del proyecto
+Clone this repository (ssh):
+```sh
+git clone git@github.com:Rizquez/AutoDocMind.git
 ```
-├── images\...
+
+Access the project directory:
+```sh
+cd AutoDocMind
+```
+
+Create a development environment using the **virtualenv** library:
+```sh
+virtualenv venv
+```
+
+If you do not have the library installed, you can run:
+```sh
+python -m venv env
+```
+
+Activate the development environment:
+```sh
+venv\Scripts\activate
+```
+
+Once the environment is activated, install the dependencies:
+```sh
+pip install -r requirements.txt
+```
+
+## 🛠️ Using the Project
+
+To run the project, make sure the virtual environment is activated and execute:
+
+```
+python main.py
+```
+### Once the program is active, you can: 
+
+- Indicate the start node.
+- Indicate the end node.
+- Indicate the barriers between the start and end nodes.
+- Run the algorithm.
+- Restart the program.
+- Reorganize the nodes.
+
+### This is achieved in the following way:
+
+`Right-clicking` will indicate all nodes and barriers, the first click will be the `start node` and the second click the `end node`, the following clicks will be the barriers (if you hold down the right mouse button, the barriers will be drawn continuously).
+
+`Left-clicking` will remove any nodes or barriers that you do not want to keep (a `start` and `end` node are required for the algorithm to run).
+
+To run the program, press the `space bar`, and to restart it, press the `C` key.
+
+#### Node map
+
+![img](public/map.png)
+
+#### Shortest path from the initial node to the final node
+
+![img](public/path.png)
+
+## 📂 Project structure
+
+```
+├── public/...
+├── settings
+│   ├── __init__.py
+│   └── constants.py
 ├── src
-│   ├── config
-│   │   └── config.py
+│   ├── core
+│   │   ├── __init__.py
+│   │   └── algorithm.py
 │   ├── models
-│   │   ├── a_star.py
+│   │   ├── __init__.py
 │   │   └── point.py
-│   ├── utils
-│   │   ├── drawing.py
-│   │   └── geometry.py
 │   └── setup.py
 ├── .gitignore
 ├── LICENSE
@@ -49,54 +110,38 @@ El algoritmo A* es ampliamente utilizado debido a su capacidad para encontrar ca
 └── requirements.txt
 ```
 
-## ⚙️ Creacion de un entorno virtual
-Se necesitara tener instalada previamente la libreria `virtualenv`, en caso contrario se podra instalar ejecutando el siguiente comando:
-```
-pip install virtualenv
-```
-Una vez instalada, para crear un entorno de desarrollo se debe ejecutar:
-```
-python -m virtualenv venv
-```
-Y para activar el entorno virtual se debe ejecutar el comando:
-```
-venv\Scripts\activate
-```
-> [!TIP]
-> Se recomienda la creacion de un entorno virtual para optimizar el desarrollo y la ejecucion del proyecto.
+## 🎯 Additional considerations for developers
 
-## 🧾 Dependencias
-Las dependencias de este proyecto se encuentran en el fichero `requirements.txt`, las cuales se instalan mediante la ejecucion del siguiente comando:
-```
-pip install -r requirements.txt
-```
+### Forward References (PEP 484)
 
-## 🛠️ Uso del Proyecto
-Para ejecutar el proyecto, asegurate de que el entorno virtual este activado y ejecuta:
+The project uses *Forward References* according to *PEP 484*. By using `TYPE_CHECKING`, the import of a class is only performed at static type checking time (for example, with *mypy*). During execution, `TYPE_CHECKING` evaluates to `False`, preventing the actual import. This optimizes performance and allows forward references to classes.
+
+Example:
+
+```python
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from models import MyFirstClass
+
+class MySecondClass:
+    def do_something(self, first: 'MyFirstClass') -> None:
+        pass
 ```
-python main.py
-```
-### Una vez activo el programa se podra: 
-- Indicar el nodo de inicio.
-- Indicar el nodo final.
-- Indicar las barreras entre los nodos de inicio y fin.
-- Ejecutar el algoritmo.
-- Reiniciar el programa.
-- Reorganizar los nodos.
-
-### Esto se hace de la siguiente manera:
-Con el clic `derecho` se indicaran todos los nodos y barreras, el primer clic sera el nodo de `inicio` y el segundo clic el nodo `final`, los siguientes clic seran las barreras (si se deja pulsado el clic derecho del raton se dibujaran las barreras de manera continua).
-
-Con el clic `izquierdo` se podra ir quitando los nodos o barreras que no se deseen mantener (es necesario un nodo de `inicio` y `fin` para que el algoritmo se ejecute).
-
-Para ejecutar se debera pulsar la tecla `espaciadora` y para reiniciar el programa se debera pulsar la tecla `c`.
 
 ## 📝 Contribuciones
-Las contribuciones son bienvenidas. Si deseas contribuir al proyecto, por favor haz un `fork` del repositorio, crea una rama con tus mejoras y envía un `pull request`.
 
-## 📚 Recursos adicionales
-* [Documentacion del Algoritmo A*](https://es.wikipedia.org/wiki/Algoritmo_de_b%C3%BAsqueda_A*)
-* [Explicacion interactiva de A*](https://www.lanshor.com/pathfinding-a-estrella/)
+Contributions are welcome. If you would like to contribute to the project, please `fork` the repository, create a branch with your improvements, and send a `pull request`.
 
-* ## 📄 Licencia
-Este proyecto está bajo una licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+## 📖 Additional documentation
+
+* [A* Algorithm Documentation](https://es.wikipedia.org/wiki/Algoritmo_de_b%C3%BAsqueda_A*)
+* [Interactive explanation of A*](https://www.lanshor.com/pathfinding-a-estrella/)
+
+## 🔒 License
+
+This project is licensed under the *MIT* license, which allows its use, distribution, and modification under the conditions specified in the *LICENSE* file.
+
+## ⚙ Contact, support, and development
+
+- Pedro Rizquez: pedro.rizquez.94@hotmail.com

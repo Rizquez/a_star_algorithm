@@ -5,21 +5,7 @@
 
 # MODULES (INTERNAL)
 # ---------------------------------------------------------------------------------------------------------------------
-from .constants import (
-    ROWS, 
-    WINDOW_WIDTH, 
-    GAP_GRID, 
-    RED, 
-    GREEN, 
-    BLUE, 
-    YELLOW, 
-    WHITE, 
-    BLACK, 
-    PURPLE, 
-    ORANGE, 
-    GREY, 
-    TURQUOISE
-)
+from .algorithm import a_star
 # ---------------------------------------------------------------------------------------------------------------------
 
 # OPERATIONS / CLASS CREATION / GENERAL FUNCTIONS
